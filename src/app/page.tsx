@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import GPTLogo from '@/components/gptLogo';
+import GPTLogo from '@/components/GPTLogo';
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
@@ -41,7 +41,7 @@ export default function Home() {
         <div className="flex flex-row items-end m-3 justify-evenly">
           <h5 className="font-bold">Hello, {name}</h5>
           <DropdownMenu>{/*I want to hide this menu and only show this icon when the user is on mobile devices*/}
-            <DropdownMenuTrigger as="div" onClick={toggleMenu} className="cursor-pointer">
+            <DropdownMenuTrigger onClick={toggleMenu} className="cursor-pointer">
               <div className={`w-9 h-1 bg-black my-1.5 transition-transform duration-300 ${isOpen ? 'transform rotate-45 translate-y-2.5' : ''}`}></div>
               <div className={`w-9 h-1 bg-black my-1.5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
               <div className={`w-9 h-1 bg-black my-1.5 transition-transform duration-300 ${isOpen ? 'transform -rotate-45 -translate-y-2.5' : ''}`}></div>
