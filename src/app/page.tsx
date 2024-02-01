@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import GPTLogo from '@/components/GPTLogo';
+import SideNav from '@/components/sideNav';
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
@@ -37,36 +38,12 @@ export default function Home() {
 
   return (
     <div className="container-fluid mx-auto flex h-full">
-      <div className={`w-60 bg-slate-500 h-screen ${messages.length > 0 ? 'hidden md:block' : ''}`}>{/*I want to hide this div when on mobile devices, and show it on the left side of the screen when on desktop. I want the hamburger menu to be able to open/close this side menu on mobile devices*/}
-        <div className="flex flex-row items-end m-3 justify-evenly">
-          <h5 className="font-bold">Hello, {name}</h5>
-          <DropdownMenu>{/*I want to hide this menu and only show this icon when the user is on mobile devices*/}
-            <DropdownMenuTrigger onClick={toggleMenu} className="cursor-pointer">
-              <div className={`w-9 h-1 bg-black my-1.5 transition-transform duration-300 ${isOpen ? 'transform rotate-45 translate-y-2.5' : ''}`}></div>
-              <div className={`w-9 h-1 bg-black my-1.5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
-              <div className={`w-9 h-1 bg-black my-1.5 transition-transform duration-300 ${isOpen ? 'transform -rotate-45 -translate-y-2.5' : ''}`}></div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
-              <ModeToggle />
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        <Separator className='my-4' />
-        <div className="flex flex-col items-center">
-          <h2 className="font-bold">Chat History</h2>
-          {/* Placeholder for chat history. You might want to map through your chat history state here. */}
-        </div>
-      </div>
-      <ScrollArea className="container h-screen">
+      <SideNav name={'name'} />
+
+      <ScrollArea className="container mx-auto h-screen">
         <div className="flex flex-col items-center">
           {messages.length === 0 && (
-            <h1 className="lg:text-5xl md:text-4xl sm:text-2xl font-bold m-5">
+            <h1 className="lg:text-5xl md:text-4xl sm:text-2xl sm:m-10 font-bold m-5">
               Welcome to 24-hour GPT!
             </h1>
           )}
@@ -76,19 +53,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="pt-4 pb-32">
+        <div className="pt-4 pb-32 h-auto">
           {messages.map((message) => (
             <div
               key={message.id}
-              className={`border-t ${
-                message.role === "assistant"
-                  ? "bg-white text-black"
-                  : "bg-black text-white" 
-              } ${
-                message.role === "user"
+              className={`border-t ${message.role === "assistant"
+                ? "bg-white text-black"
+                : "bg-black text-white"
+                } ${message.role === "user"
                   ? "bg-black text-white"
                   : "bg-white text-black"
-              }`}
+                }`}
             >
               <div className='max-w-3xl mx-auto py-6 flex'>
                 {message.role === "assistant" && (
@@ -101,19 +76,21 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <form
-          className="absolute bottom-10 lg:left-1/4 input-area w-3/5 flex flex-row"
-          onSubmit={handleSubmit}
-        >
-          <input
-            value={input}
-            type="text"
-            onChange={handleInputChange}
-            className="p-2 border rounded-lg w-full"
-            placeholder="Talk to 24-hour GPT..."
-          />
-          <Button>{'->'}</Button>
-        </form>
+        <div className="absolute w-max h-100 text-center bottom-10 left-10">
+          <form
+            className="flex flex-row items-center lg:w-[700px] md:w-[500px] sm:w-[500px] w-full"
+            onSubmit={handleSubmit}
+          >
+            <input
+              value={input}
+              type="text"
+              onChange={handleInputChange}
+              className="p-2 border rounded-lg w-full"
+              placeholder="Talk to 24-hour GPT..."
+            />
+            <Button className="bg-green-400">{'->'}</Button>
+          </form>
+        </div>
       </ScrollArea>
     </div>
   );
