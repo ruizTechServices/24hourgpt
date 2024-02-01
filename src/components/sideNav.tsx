@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ModeToggle } from './mode-toggle';
+import { Separator } from '@radix-ui/react-dropdown-menu';
 
 type SideNavProps = {
     name: string;
@@ -14,9 +16,9 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
             {/* Mobile Hamburger Menu Icon */}
             <div className='absolute left-5 top-3 z-20 md:hidden'>
                 <div onClick={toggleMenu} className="cursor-pointer">
-                    <div className={`w-9 h-1 bg-white my-1.5 transition-transform duration-300 ${isOpen ? 'transform rotate-45 translate-y-2.5' : ''}`}></div>
-                    <div className={`w-9 h-1 bg-white my-1.5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
-                    <div className={`w-9 h-1 bg-white my-1.5 transition-transform duration-300 ${isOpen ? 'transform -rotate-45 -translate-y-2.5' : ''}`}></div>
+                    <div className={`w-9 h-1 bg-black text-black dark:bg-white dark:text-white my-1.5 transition-transform duration-300 ${isOpen ? 'transform rotate-45 translate-y-2.5' : ''}`}></div>
+                    <div className={`w-9 h-1 bg-black text-black dark:bg-white dark:text-white my-1.5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
+                    <div className={`w-9 h-1 bg-black text-black dark:bg-white dark:text-white my-1.5 transition-transform duration-300 ${isOpen ? 'transform -rotate-45 -translate-y-2.5' : ''}`}></div>
                 </div>
             </div>
 
@@ -31,6 +33,11 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
                 <div className="flex flex-col items-center">
                     <h2 className="font-bold text-white">Chat History</h2>
                     {/* Placeholder for chat history. You might want to map through your chat history state here. */}
+                </div>
+          <div className="md:absolute md:left-10 flex flex-col items-center md:bottom-10 mt-20">
+                    <ModeToggle />
+            <Separator className="mt-10" />
+            <span className='text-xs'>©2024 ruizTechServices|</span>
                 </div>
             </div>
             <div className={`fixed inset-0 bg-black opacity-50 z-10 ${isOpen ? 'block' : 'hidden'} md:hidden`} onClick={toggleMenu}></div> {/* Overlay when menu is open */}

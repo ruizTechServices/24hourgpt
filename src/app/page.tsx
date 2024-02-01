@@ -1,40 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from '@/components/ui/button';
 import PricingTable from "@/components/gptPricingTable";
-import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useChat } from 'ai/react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import GPTLogo from '@/components/GPTLogo';
 import SideNav from '@/components/sideNav';
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
-  const [name, setName] = useState('');
-  const [isOpen, setIsOpen] = useState(false); // State to manage the menu icon
-
-  // Toggles the isOpen state between true and false
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // useEffect to load the username prompt once on component mount
-  // useState(() => {
-  //   const userName = window.prompt('Please enter your name:');
-  //   if (userName) {
-  //     setName(userName);
-  //   }
-  // }, []); // Empty dependency array ensures this runs only once
+  
 
   return (
     <div className="container-fluid mx-auto flex h-full">
