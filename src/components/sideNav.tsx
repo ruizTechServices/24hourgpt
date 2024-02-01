@@ -16,7 +16,7 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
     return (
         <div>
             {/* Mobile Hamburger Menu Icon */}
-            <div className='absolute left-5 top-3 z-20 md:hidden'>
+            <div className='absolute left-5 top-3 z-50 md:hidden'>
                 <div onClick={toggleMenu} className="cursor-pointer">
                     <div className={`w-9 h-1 bg-black text-black dark:bg-white dark:text-white my-1.5 transition-transform duration-300 ${isOpen ? 'transform rotate-45 translate-y-2.5' : ''}`}></div>
                     <div className={`w-9 h-1 bg-black text-black dark:bg-white dark:text-white my-1.5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></div>
@@ -25,13 +25,13 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
             </div>
 
             {/* Sidebar for both Mobile and Desktop */}
-            <div className={`fixed bg-slate-500 h-screen z-10 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-1000 md:translate-x-0 md:static w-60`}>
+            <div className={`fixed bg-slate-500 h-full z-40 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-1000 md:translate-x-0 md:static w-60`}>
                 <div className="flex flex-row items-end justify-evenly">
                     <h5 className="mt-10 font-bold text-white dark:text-black">Hello, {name}</h5>
                 </div>
                 <div className="flex flex-col items-center">
                     <h2 className="font-bold text-white dark:text-black">Chat History</h2>
-                    <ScrollArea className="max-h-[250px] max-w-[50px] text-white dark:text-black">
+                    <ScrollArea className="max-h-[150px] max-w-[50px] text-white dark:text-black">
                         {/* Placeholder for chat history. You might want to map through your chat history state here. */}
                         <h5>hello</h5>
                         <h5>hello</h5>
