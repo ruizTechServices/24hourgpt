@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ModeToggle } from './mode-toggle';
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 
 type SideNavProps = {
     name: string;
@@ -23,21 +25,44 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
             </div>
 
             {/* Sidebar for both Mobile and Desktop */}
-            <div className={`fixed top-0 left-0 bg-slate-500 h-screen z-10 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 md:translate-x-0 md:static md:w-60`}>
-                <div className="flex flex-row items-end m-3 justify-evenly">
-                    <h5 className="mt-10 font-bold text-white">Hello, {name}</h5>
-                    <div className="md:hidden" onClick={toggleMenu}>
-                        <div className={`w-6 h-6 text-white rotate-45`}> &times; </div>
-                    </div>
+            <div className={`fixed bg-slate-500 h-screen z-10 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-1000 md:translate-x-0 md:static w-60`}>
+                <div className="flex flex-row items-end justify-evenly">
+                    <h5 className="mt-10 font-bold text-white dark:text-black">Hello, {name}</h5>
                 </div>
                 <div className="flex flex-col items-center">
-                    <h2 className="font-bold text-white">Chat History</h2>
-                    {/* Placeholder for chat history. You might want to map through your chat history state here. */}
+                    <h2 className="font-bold text-white dark:text-black">Chat History</h2>
+                    <ScrollArea className="max-h-[250px] max-w-[50px] text-white dark:text-black">
+                        {/* Placeholder for chat history. You might want to map through your chat history state here. */}
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                        <h5>hello</h5>
+                    </ScrollArea>
                 </div>
-          <div className="md:absolute md:left-10 flex flex-col items-center md:bottom-10 mt-20">
+                <div className="absolute left-10 flex flex-col items-center text-center bottom-10 mt-20">
                     <ModeToggle />
-            <Separator className="mt-10" />
-            <span className='text-xs'>©2024 ruizTechServices|</span>
+                    <Separator className="mt-10" />
+                    <span className='text-xs'>©2024 ruizTechServices <span className="blink">|</span></span>
                 </div>
             </div>
             <div className={`fixed inset-0 bg-black opacity-50 z-10 ${isOpen ? 'block' : 'hidden'} md:hidden`} onClick={toggleMenu}></div> {/* Overlay when menu is open */}

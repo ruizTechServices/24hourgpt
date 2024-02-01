@@ -9,11 +9,13 @@ import SideNav from '@/components/sideNav';
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
-  
+
+  let name = "Giovanni";
+
 
   return (
     <div className="container-fluid mx-auto flex h-full">
-      <SideNav name={'name'} />
+      <SideNav name={name} />
 
       <ScrollArea className="container mx-auto h-screen">
         <div className="flex flex-col items-center">
@@ -22,11 +24,13 @@ export default function Home() {
               Welcome to 24-hour GPT!
             </h1>
           )}
+          {/*Remove this and place it in a dropdown*/}
           <div className="w-3/5 border rounded-lg hidden">
             <div className='p-5 bg-white text-black rounded-lg text-center'>
               <PricingTable />
             </div>
           </div>
+          {/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/}
         </div>
         <div className="pt-4 pb-32 h-auto">
           {messages.map((message) => (
@@ -51,11 +55,17 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="absolute w-max h-100 text-center bottom-10 left-10">
+        <div className="absolute w-max h-100 text-center bottom-10 left-5">
           <form
-            className="flex flex-row items-center lg:w-[700px] md:w-[500px] sm:w-[500px] w-full"
+            className="flex flex-row items-center lg:w-[900px] md:w-[500px] sm:w-[600px] w-full"
             onSubmit={handleSubmit}
           >
+            <div>
+              <Button className='text-red-500'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+              </svg>
+              </Button>
+            </div>
             <input
               value={input}
               type="text"
