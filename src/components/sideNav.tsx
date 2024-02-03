@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { ModeToggle } from './mode-toggle';
-import { Separator } from '@radix-ui/react-dropdown-menu';
+import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import { Button } from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Link from 'next/link';
+// import { auth } from '@clerk/nextjs';
 
 type SideNavProps = {
     name: string;
@@ -10,6 +21,8 @@ type SideNavProps = {
 
 const SideNav: React.FC<SideNavProps> = ({ name }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    // const { userId } = auth();
+    // console.log(userId);
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -34,34 +47,31 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
                     <ScrollArea className="max-h-[150px] max-w-[50px] text-white dark:text-black">
                         {/* Placeholder for chat history. You might want to map through your chat history state here. */}
                         <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
-                        <h5>hello</h5>
                     </ScrollArea>
                 </div>
                 <div className="absolute left-10 flex flex-col items-center text-center bottom-10 mt-20">
-                    <ModeToggle />
-                    <Separator className="mt-10" />
+                    <div className="flex flex-row items-center justify-center space-x-2">
+                        <ModeToggle />
+                        <Separator orientation="vertical" className='text-white' />
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="outline">Account</Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-56">
+                                <DropdownMenuLabel>24 Hour GPT</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuRadioGroup>
+                                    <DropdownMenuRadioItem className='' value={''}><Link href={'/sign-in'}>Sign-in</Link></DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem className='' value={''}><Link href={'/sign-up'}>Sign-up</Link></DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem className='hidden' value={''}>Sign-out</DropdownMenuRadioItem>
+                                </DropdownMenuRadioGroup>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+
+            <Separator
+              orientation="horizontal"
+              className="text-black dark:text-white m-5"/>
                     <span className='text-xs'>©2024 ruizTechServices <span className="blink">|</span></span>
                 </div>
             </div>

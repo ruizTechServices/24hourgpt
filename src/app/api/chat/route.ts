@@ -21,7 +21,13 @@ export async function POST(req: Request) {
         stream: true
     });
 
-    const stream = OpenAIStream(response);
+    const stream = OpenAIStream(response,{
+        //you can save to database here
+      //you want to save to MongoDB and Pinecone and return the saved history as a list of messages
+      //but it has to be to each Clerk user, basically each user that signs up has their own database and messages with Clerk in MongoDB and Pinecone, right? Research this to be more accurate with this information
+      //how should I do this?
+      //show me step-by-step
+    });
     return new StreamingTextResponse(stream);
 
 };
