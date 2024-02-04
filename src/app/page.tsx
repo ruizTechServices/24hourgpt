@@ -1,3 +1,4 @@
+// C:\Users\NEWOWNER\OneDrive\Desktop\ruizTechServices\24hourgpt\24hourgpt\src\app\page.tsx
 "use client";
 import React from 'react';
 import SideNav from '@/components/sideNav';

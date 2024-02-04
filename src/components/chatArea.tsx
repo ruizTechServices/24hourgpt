@@ -1,15 +1,16 @@
+// C:\Users\NEWOWNER\OneDrive\Desktop\ruizTechServices\24hourgpt\24hourgpt\src\components\chatArea.tsx
 "use client";
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import GPTLogo from '@/components/GPTLogo';
 
-// Define a type for the message
+// Update the Message type to include all possible 'role' values
 type Message = {
-    id: string;
-    content: string;
-    role: 'user' | 'assistant';
-  };
+  id: string;
+  content: string;
+  role: 'user' | 'assistant' | 'system' | 'function' | 'data' | 'tool';
+};
   
   // Define a type for the props
   interface ChatAreaProps {

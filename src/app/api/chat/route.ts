@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     //ask openai for the streaming chat completion
     const response = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo-1106',
+        model: 'gpt-3.5-turbo-0125',
         messages,
         stream: true
     });
