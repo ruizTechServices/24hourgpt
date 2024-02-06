@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import GPTLogo from '@/components/GPTLogo';
 
+
 // Update the Message type to include all possible 'role' values
 type Message = {
   id: string;

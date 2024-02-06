@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ModeToggle } from './mode-toggle';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import Link from 'next/link';
-// import { auth } from '@clerk/nextjs';
+import { UserButton } from "@clerk/nextjs";
 
 type SideNavProps = {
     name: string;
 };
 
+
 const SideNav: React.FC<SideNavProps> = ({ name }) => {
+
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    // const { userId } = auth();
-    // console.log(userId);
+
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
+    useEffect(() => {
+        // Fetch the user ID from your API route
+        fetch('/api/auth')
+            .then(response => response.json())
+            .then(data => setUserId(data.userId));
+    }, []);
+
+    const [userId, setUserId] = useState<string | null>(null);
+
+
+
     return (
-        <div>
+        <div className='h-screen'>
             {/* Mobile Hamburger Menu Icon */}
             <div className='absolute left-5 top-3 z-50 md:hidden'>
                 <div onClick={toggleMenu} className="cursor-pointer">
@@ -39,6 +41,11 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
 
             {/* Sidebar for both Mobile and Desktop */}
             <div className={`fixed bg-slate-500 h-full z-40 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-1000 md:translate-x-0 md:static w-60`}>
+                {(window.location.pathname !== '/') && (
+                    <div className='pt-2 text-center'>
+                        <Link href="/">Home</Link>
+                    </div>
+                )}
                 <div className="flex flex-row items-end justify-evenly">
                     <h5 className="mt-10 font-bold text-white dark:text-black">Hello, {name}</h5>
                 </div>
@@ -49,35 +56,38 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
                         <h5>hello</h5>
                     </ScrollArea>
                 </div>
-                <div className="absolute left-10 flex flex-col items-center text-center bottom-10 mt-20">
+                <div className="absolute left-10 flex flex-col items-center text-center bottom-10 mt-20 z-30">
                     <div className="flex flex-row items-center justify-center space-x-2">
                         <ModeToggle />
-                        <Separator orientation="vertical" className='text-white' />
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="outline">Account</Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56">
-                                <DropdownMenuLabel>24 Hour GPT</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuRadioGroup>
-                                    <DropdownMenuRadioItem className='' value={''}><Link href={'/sign-in'}>Sign-in</Link></DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem className='' value={''}><Link href={'/sign-up'}>Sign-up</Link></DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem className='hidden' value={''}>Sign-out</DropdownMenuRadioItem>
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                    </div>
+                        <Separator
+                            orientation="vertical"
+                            className="border h-10" />
+                        <div className="flex flex-row items-center justify-center">
+                            <UserButton afterSignOutUrl='/' />
+                        </div>
 
-            <Separator
-              orientation="horizontal"
-              className="text-black dark:text-white m-5"/>
-                    <span className='text-xs'>©2024 ruizTechServices <span className="blink">|</span></span>
+                        {!userId && (
+                            <div className="flex flex-col items-center justify-center">
+                                <Link href={'/sign-in'}>Sign-in</Link>
+                                <Link href={'/sign-up'}>Sign-up</Link>
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <Separator
+                            orientation="horizontal"
+                            className="text-black dark:text-white m-5" />
+                        <span className='text-xs'>©2024 ruizTechServices <span className="blink">|</span></span>
+                    </div>
                 </div>
+                <div className={`fixed inset-0 bg-black opacity-50 z-10 ${isOpen ? 'block' : 'hidden'} md:hidden`} onClick={toggleMenu}></div> {/* Overlay when menu is open */}
             </div>
-            <div className={`fixed inset-0 bg-black opacity-50 z-10 ${isOpen ? 'block' : 'hidden'} md:hidden`} onClick={toggleMenu}></div> {/* Overlay when menu is open */}
         </div>
     );
 };
 
 export default SideNav;
+function setUserId(userId: any): any {
+    throw new Error('Function not implemented.');
+}
+
