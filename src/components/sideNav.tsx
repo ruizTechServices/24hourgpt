@@ -1,3 +1,4 @@
+//C:\Users\NEWOWNER\OneDrive\Desktop\ruizTechServices\24hourgpt\24hourgpt\src\components\sideNav.tsx
 import React, { useEffect, useState } from 'react';
 import { ModeToggle } from './mode-toggle';
 import { Separator } from '@/components/ui/separator';
@@ -18,11 +19,24 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
     const toggleMenu = () => setIsOpen(!isOpen);
 
     useEffect(() => {
-        // Fetch the user ID from your API route
-        fetch('/api/auth')
+        fetch("/api/user")
             .then(response => response.json())
-            .then(data => setUserId(data.userId));
+            .then(data => {
+                if (data && data.userId) { // Check that data is not null and has a userId property
+                    setUserId(data.userId);
+                } else {
+                    // Handle the case where userId is not present or data is null
+                    console.log("User ID not found:", data);
+                    setUserId(null);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching user data:", error);
+                setUserId(null);
+                // Handle the error state appropriately
+            });
     }, []);
+
 
     const [userId, setUserId] = useState<string | null>(null);
 
@@ -87,7 +101,3 @@ const SideNav: React.FC<SideNavProps> = ({ name }) => {
 };
 
 export default SideNav;
-function setUserId(userId: any): any {
-    throw new Error('Function not implemented.');
-}
-

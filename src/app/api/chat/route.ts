@@ -1,4 +1,4 @@
-// /api/chat
+// C:\Users\NEWOWNER\OneDrive\Desktop\ruizTechServices\24hourgpt\24hourgpt\src\app\api\chat\route.ts
 import { Configuration, OpenAIApi } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     //ask openai for the streaming chat completion
     const response = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo-0125',
+        model: 'gpt-4-0125-preview',// gpt-3.5-turbo-0125 gpt-4-0125-preview
         messages,
         stream: true
     });
@@ -31,3 +31,4 @@ export async function POST(req: Request) {
     return new StreamingTextResponse(stream);
 
 };
+
