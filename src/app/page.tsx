@@ -12,6 +12,7 @@ export default function Home() {
   return (
     <div className="container-fluid mx-auto flex h-full">
       <SideNav name={name} />
+      :)
       <ChatArea
         messages={messages}
         input={input}
